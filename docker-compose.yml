@@ -1,0 +1,36 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+version: '2'
+services:
+  mariadb:
+    image: docker.io/bitnami/mariadb:11.2
+    volumes:
+      - './mariadb_data:/bitnami/mariadb'
+    env_file:
+      - .env
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./caddy_data/Caddyfile:/etc/caddy/Caddyfile
+      - ./caddy_data/caddy/data:/data # Optional
+      - ./caddy_data/caddy/config:/config # Optional
+
+  wordpress:
+    image: docker.io/bitnami/wordpress:6
+    ports:
+      - '8080:8080'
+      - '8443:8443'
+    volumes:
+      - './wordpress_data:/bitnami/wordpress'
+    depends_on:
+      - mariadb
+    env_file:
+      - .env
+
+
