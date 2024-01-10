@@ -5,7 +5,7 @@
     # Optional staging lets encrypt for testing. Comment out for production.
     # acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
 }
-wp-1.marchell.com {
+wp-1.marchell.xyz {
     encode zstd gzip
 
     reverse_proxy wordpress:8080
@@ -21,6 +21,6 @@ wp-1.marchell.com {
         # Content-Security-Policy: default-src 'self'
     }
 }
-www.wp-1.marchell.com {
-    redir https://wp-1.marchell.com{uri}
+www.wp-1.marchell.xyz {
+    redir https://wp-1.marchell.xyz{uri}
 }
