@@ -5,6 +5,7 @@ version: '2'
 services:
   mariadb:
     image: docker.io/bitnami/mariadb:11.2
+    restart: unless-stopped
     volumes:
       - './mariadb_data:/bitnami/mariadb'
     env_file:
@@ -23,6 +24,7 @@ services:
 
   wordpress:
     image: docker.io/bitnami/wordpress:6
+    restart: unless-stopped
     ports:
       - '8080:8080'
       - '8443:8443'
